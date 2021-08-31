@@ -30,6 +30,7 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
+          name: Build back-end
           command: |
            echo "Creating Swapna Backend!"
            cd backend
