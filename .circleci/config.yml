@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Build front-end
           command: echo "Creating Swapna Frontend!"
-      - run: cd 
+      - run: cd frontend
       - run: npm i
       - run: npm run build
             
@@ -30,7 +30,7 @@ jobs:
           keys: [backend-build]
       - run:
           command: echo "Creating Swapna Backend!"
-      - run: cd 
+      - run: cd backend
       - run: npm i
       - run: npm run build
       - save_cache:
