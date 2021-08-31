@@ -1,9 +1,7 @@
 # This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
 version: 2.1
 
-orbs:
-  node: circleci/node@4.1
-  
+
 jobs:
   build-frontend:
     docker:
@@ -16,7 +14,6 @@ jobs:
           name: Build front-end
           command: |
             cd frontend
-            npm i
             npm run build
             exit 1
       - save_cache:
@@ -33,8 +30,7 @@ jobs:
       - run:
           name: Back-end build
           command: |
-             cd backend
-             npm i
+             cd backend             
              npm run build
              exit 1
       - save_cache:
