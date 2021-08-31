@@ -12,10 +12,11 @@ jobs:
           keys: [frontend-build]
       - run:
           name: Build front-end
-          command: |
-            cd frontend
-            npm run build
-            exit 1
+          command: echo "Creating Swapna Frontend!"
+      - run: cd 
+      - run: npm i
+      - run: npm run build
+            
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
@@ -28,11 +29,10 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
-          name: Back-end build
-          command: |
-             cd backend             
-             npm run build
-             exit 1
+          command: echo "Creating Swapna Backend!"
+      - run: cd 
+      - run: npm i
+      - run: npm run build
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
