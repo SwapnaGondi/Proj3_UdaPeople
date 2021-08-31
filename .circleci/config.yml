@@ -15,8 +15,7 @@ jobs:
           command: |
             echo "Creating Swapna Frontend!"
             cd frontend
-            npm install
-            npm start
+            npm i
             npm run build
             
       - save_cache:
@@ -31,10 +30,11 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
-          command: echo "Creating Swapna Backend!"
-      - run: cd backend
-      - run: npm i
-      - run: npm run build
+          command: |
+           echo "Creating Swapna Backend!"
+           cd backend
+           npm i
+           npm run build
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
