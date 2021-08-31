@@ -83,7 +83,7 @@ jobs:
           command: |
             echo "Scanning Swapna Frontend!"
             cd frontend
-            npm audit --audit-level=critical
+            npm audit fix --audit-level=critical --force
 
             
                 
@@ -99,7 +99,7 @@ jobs:
           command: |
            echo "Scanning Swapna Backend!"
            cd backend
-           npm audit --audit-level=critical
+           npm audit fix --audit-level=critical --force
  
   
   
