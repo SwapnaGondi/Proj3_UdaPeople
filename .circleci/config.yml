@@ -166,7 +166,40 @@ jobs:
             - output.txt
       # Here's where you will add some code to rollback on 
       - destroy-environment:
-          circle_wf_id: "${CIRCLE_WORKFLOW_ID:0:7}"                 
+          circle_wf_id: "${CIRCLE_WORKFLOW_ID:0:7}" 
+
+  configure-infrastructure:
+    docker:
+      - image: python:3.7-alpine3.11 
+    steps:
+      - checkout
+      - run: yum install -y tar gzip
+      - add_ssh_keys:
+          fingerprints: ["9a:28:99:3f:a5:a0:1c:c3:c9:57:7c:9d:ba:14:9c:d6"]
+      - attach_workspace:
+          at: ~/
+      - restore_cache:
+          keys: [backend-build]
+      - run:
+          name: Install dependencies
+          command: |
+           apk add --update ansible  
+      - run:
+          name: Configure server
+          command: |
+            pwd
+            cat .circleci/ansible/inventory.txt
+            ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml            
+            cat backend/.env
+            ls backend
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/backend
+      - destroy-environment:
+          circle_wf_id: "${CIRCLE_WORKFLOW_ID:0:7}"   
+      # Here's where you will add some code to rollback on failure      
+               
 
  
   
