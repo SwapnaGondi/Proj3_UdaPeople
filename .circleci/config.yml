@@ -220,6 +220,13 @@ jobs:
             echo ENVIRONMENT=production > "frontend/.env"
             echo NODE_ENV=production >> "frontend/.env"
             echo API_URL=$API_URL >> "frontend/.env"
+  deploy-frontend:    
+    docker:
+      - image: amazon/aws-cli:latest
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
       - run:
           name: Deploy frontend objects
           command: |
