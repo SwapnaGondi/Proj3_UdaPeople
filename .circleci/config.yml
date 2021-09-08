@@ -22,7 +22,7 @@ commands:
           command: |
             echo "Destroying environment: <<parameters.circle_wf_id>> "
             aws cloudformation delete-stack --stack-name Udapeople-backend-<<parameters.circle_wf_id>>
-            aws s3 rm s3://udapeople-c3-udap-<<parameters.circle_wf_id>> --recursive
+            # aws s3 rm s3://udapeople-c3-udap-<<parameters.circle_wf_id>> --recursive
             aws cloudformation delete-stack --stack-name Udapeople-frontend-<<parameters.circle_wf_id>>
         
 
@@ -214,11 +214,7 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            cd backend
-            npm i
-            cat .env
-            npm run migrations > migration_status.txt
-            cat migration_status.txt
+            npm run migrations > migration_status
       - run:
           name: Send migration results to memstash
           working_directory: ./backend
