@@ -434,8 +434,8 @@ workflows:
       - deploy-infrastructure:
           filters:
             branches:
-              only:
-                - master
+              only: [circleci-editor/master]
+                
 
       - configure-infrastructure:
           requires:
@@ -450,8 +450,8 @@ workflows:
             - configure-infrastructure
           filters:
             branches:
-              only:
-                - master
+              only: [circleci-editor/master]
+                
 
       - deploy-frontend:
           requires:
