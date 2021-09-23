@@ -236,8 +236,8 @@ jobs:
           name: Install dependencies
           command: |
            
-            apk add --update curl nodejs npm
-            apk add --update curl tar
+            # apk add --update curl nodejs npm
+            # apk add --update curl tar
             npm install webpack-dev-server -g
             npm install
             pip install awscli
