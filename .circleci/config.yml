@@ -115,7 +115,7 @@ jobs:
       - install-dep:
           path: frontend
 
-  build-backend:
+  Build-backend:
     executor: node
     steps:
       - checkout
@@ -129,28 +129,28 @@ jobs:
       - build:
           path: frontend
 
-  test-backend:
+  Test-backend:
     executor: node
     steps:
       - checkout
       - test:
           path: backend
 
-  test-frontend:
+  Test-frontend:
     executor: node
     steps:
       - checkout
       - test:
           path: frontend
 
-  scan-backend:
+  Scan-backend:
     executor: node
     steps:
       - checkout
       - scan:
           path: backend
 
-  scan-frontend:
+  Scan-frontend:
     executor: node
     steps:
       - checkout
@@ -182,7 +182,7 @@ jobs:
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID}" \
               --parameter-overrides ID=${CIRCLE_WORKFLOW_ID}
       - run:
-          name: Add backend IP to inventory file & memstash
+          name: Add backend ip to inventory file 
           command: |
             backend_ip=$(aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
@@ -357,11 +357,11 @@ jobs:
           command: |
             url="https://udapeople-${CIRCLE_WORKFLOW_ID}.s3.amazonaws.com/index.html"
             curl -s ${url} | grep -q "Welcome"
-      - destroy-environment:
-          id: ${CIRCLE_WORKFLOW_ID}
-          when: on_fail
-      - revert-migrations:
-          when: on_fail
+     # - destroy-environment:
+     #     id: ${CIRCLE_WORKFLOW_ID}
+     #     when: on_fail
+    #  - revert-migrations:
+   #       when: on_fail
 
   cloudfront-update:
     executor: aws
@@ -410,23 +410,23 @@ workflows:
       - install-backend-dep
       - install-frontend-dep
 
-      - build-backend:
+      - Build-backend:
           requires:
             - install-backend-dep
       - build-frontend:
           requires:
             - install-frontend-dep
 
-      - test-backend:
+      - Test-backend:
           requires:
-            - build-backend
-      - test-frontend:
+            - Build-backend
+      - Test-frontend:
           requires:
             - build-frontend
 
-      - scan-backend:
+      -sscan-backend:
           requires:
-            - build-backend
+            - Build-backend
       - scan-frontend:
           requires:
             - build-frontend
@@ -443,10 +443,10 @@ workflows:
 
       - run-migrations:
           requires:
-            - test-backend
-            - test-frontend
-            - scan-backend
-            - scan-frontend
+            - Test-backend
+            - Test-frontend
+            - Scan-backend
+            - Scan-frontend
             - configure-infrastructure
           filters:
             branches:
