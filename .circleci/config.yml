@@ -424,10 +424,10 @@ workflows:
           requires:
             - build-frontend
 
-      -sscan-backend:
+      - Scan-backend:
           requires:
             - Build-backend
-      - scan-frontend:
+      - Scan-frontend:
           requires:
             - build-frontend
 
