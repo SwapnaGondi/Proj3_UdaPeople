@@ -440,7 +440,7 @@ workflows:
       - deploy-infrastructure:
           filters:
             branches:
-              only: [circleci-editor/master]
+              only: [circleci-editor/SwapnaGondi-CICD]
                 
 
       - configure-infrastructure:
@@ -456,7 +456,7 @@ workflows:
             - configure-infrastructure
           filters:
             branches:
-              only: [circleci-editor/master]
+              only: [circleci-editor/SwapnaGondi-CICD]
                 
 
       - deploy-frontend:
