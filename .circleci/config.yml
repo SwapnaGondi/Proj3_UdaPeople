@@ -348,27 +348,26 @@ jobs:
       - run:
           name: Test frontend
           command: |
-            url="https://udapeople-${CIRCLE_WORKFLOW_ID}.s3.amazonaws.com/index.html"
-            echo "$url"
-            if curl -s ${url} | grep "Welcome"
-            then
-             return 0
-            else
-             return 1
-            fi
+            URL="https://udapeople-${CIRCLE_WORKFLOW_ID}.s3.amazonaws.com/index.html"
+            echo "$URL"
+            curl -s ${URL} 
+          #| grep "Welcome"
+            
+            
       - run:
           name: Test backend
           command: |
             backend_ip=$(curl -H "token: 88b9fa74-cd0d-4497-b932-fbecc4ba9ab2" \
                 --request GET https://api.memstash.io/values/backend_ip)
             url=http://$backend_ip:3030/api/status
+            echo "$url"
             curl ${url}
      
-      - destroy-environment:
-         id: ${CIRCLE_WORKFLOW_ID}
-         when: on_fail
-      - revert-migrations:
-         when: on_fail
+      #- destroy-environment:
+      #   id: ${CIRCLE_WORKFLOW_ID}
+       #  when: on_fail
+      #- revert-migrations:
+       #  when: on_fail
 
   cloudfront-update:
     executor: aws
