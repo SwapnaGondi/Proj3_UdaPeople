@@ -413,29 +413,7 @@ jobs:
 workflows:
   default:
     jobs:
-      - install-backend-dep
-      - install-frontend-dep
-
-      - Build-backend:
-          requires:
-            - install-backend-dep
-      - build-frontend:
-          requires:
-            - install-frontend-dep
-
-      - Test-backend:
-          requires:
-            - Build-backend
-      - Test-frontend:
-          requires:
-            - build-frontend
-
-      - Scan-backend:
-          requires:
-            - Build-backend
-      - Scan-frontend:
-          requires:
-            - build-frontend
+      
       - deploy-infrastructure:
           filters:
             branches:
@@ -448,10 +426,7 @@ workflows:
 
       - run-migrations:
           requires:
-            - Test-backend
-            - Test-frontend
-            - Scan-backend
-            - Scan-frontend
+            
             - configure-infrastructure
           filters:
             branches:
